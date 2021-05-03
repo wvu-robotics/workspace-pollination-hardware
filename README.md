@@ -1,11 +1,19 @@
-# WVU Robotics Pollination Simulation
+# WVU Robotics Pollination Hardware Workspace
 
 Use this repository to initialize a workspace containing packages used in
-Pollination simulations. The goal is requiring no installation steps beyond what
+Pollination robot hardware. The goal is requiring no installation steps beyond what
 is listed here (assuming a working version of ROS Melodic). At the moment,
 the Husky ROS packages are also required to spawn Bramblebee
 (`apt install ros-melodic-husky-*`), which will be addressed.
 
+### Prerequisites
+See the README files in each of the following repositories, which are pulled by ```wstool``` for a list of required packages.
+<https://github.com/wvu-robotics/bramblebee_autonomy>
+<https://github.com/wvu-robotics/pollination-drive-base>
+<https://github.com/wvu-robotics/pollination-slam>
+<https://github.com/wvu-robotics/pollination-manipulation>
+
+### Cloning Workspace and Compiling
 To begin:
 ```shell
 wstool init src pollination.rosinstall
@@ -25,7 +33,8 @@ source devel/setup.bash
 ### Running Combined Robot.
 Run the following, each in separate terminals (remember to source each):
 ```
-roslaunch combined greenhouse.launch //main robot
+roslaunch combined hardware.launch //hardware interfaces for sensors and actuators
+roslaunch combined control.launch //controllers
 roslaunch combined combined_viz.launch //rviz visualization and arm move group
 roslaunch combined nav_filter.launch //SLAM navigation
 roslaunch bramblebee_navigation move_base_mapless.launch //move_base
