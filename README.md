@@ -34,16 +34,19 @@ source devel/setup.bash
 Run the following, each in separate terminals (remember to source each):
 ```
 roslaunch combined hardware.launch //hardware interfaces for sensors and actuators
-roslaunch combined control.launch //controllers
-roslaunch combined combined_viz.launch //rviz visualization and arm move group
-roslaunch combined nav_filter.launch //SLAM navigation
-roslaunch bramblebee_navigation move_base_mapless.launch //move_base
-roslaunch manipulation_mapping flower_mapper.launch //classifier nodes
-rosrun manipulation_control ee_go_to_pose //meta move group controller for arm
-rosrun manipulation_mapping pre_pose_mapping.py //prepose mapping sequence
+roslaunch j2n6s300_moveit_config bramblebee_arm.launch 
+roslaunch combined combined_control.launch
+roslaunch combined sensor_fusion.launch
+roslaunch bramblebee_navigation move_base_mapless_demo.launch
+roslaunch manipulation_mapping flower_mapper.launch
+rosrun manipulation_control ee_go_to_pose_action_node
+rosrun manipulation_mapping pre_pose_mapping_ros.py
 rosrun manipulation_state_machine planning_ga_ros.py
 rosrun manipulation_state_machine state_machine_pollinating.py
-rosrun autonomy mission_planning_node
+rosrun manipulation_state_machine approach_action_server.py
+rosrun manipulation_pollinator pollinator_control_node
+roslaunch combined combined_viz.launch
+rosrun autonomy mission_planning_node // Send drive waypoints and commands manipulation sequence at stops
 ```
 
 ### TODO
